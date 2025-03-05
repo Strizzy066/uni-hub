@@ -14,26 +14,51 @@
     <header class="bg-white shadow-sm px-6 py-4">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center">
-                <span class="text-white font-bold text-xl">U</span>
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">U</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-medium text-gray-800">Uni Hub</h1>
+                        <p class="text-sm text-gray-500">Enhancing the Campus Community Experience</p>
+                    </div>
                 </div>
-                <div>
-                <h1 class="text-xl font-medium text-gray-800">Uni Hub</h1>
-                <p class="text-sm text-gray-500">Enhancing the Campus Community Experience</p>
-                </div>
-            </div>
-            <nav class="mt-4 md:mt-0">
-                <ul class="flex space-x-6">
-                <li><a href="{% url 'home' %}" class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">Home</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">About</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">Login</a></li>
-                <li><a href="#" class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium border border-indigo-500 rounded-full px-4 py-1 hover:bg-indigo-500 hover:text-white">Register</a></li>
-                </ul>
-            </nav>
+                <nav class="mt-4 md:mt-0">
+                    <ul class="flex space-x-6">
+                        <li><a href="{% url 'core:home' %}"
+                                class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">Home</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">About</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'core:logout' %}"
+                                class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">Logout</a>
+                        </li>
+                        {% else %}
+                        <li><a href="{% url 'core:login' %}"
+                                class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">Login</a>
+                        </li>
+                        <li><a href="{% url 'core:register' %}"
+                                class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium border border-indigo-500 rounded-full px-4 py-1 hover:bg-indigo-500 hover:text-white">Register</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
         </div>
     </header>
+
+    {% if messages %}
+    <div class="container mx-auto mt-4 px-4">
+        {% for message in messages %}
+        <div
+            class="{% if message.tags == 'error' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %} p-4 rounded-md mb-2">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     {% block content %}
     {% endblock %}
@@ -44,4 +69,5 @@
         </div>
     </footer>
 </body>
+
 </html>
