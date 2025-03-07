@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-
+from .models import Profile
 # DRF
 from rest_framework import status
 from rest_framework.views import APIView
@@ -106,3 +106,23 @@ class UserListAPIView(APIView):
         }
         
         return Response(response_data, status=status.HTTP_200_OK)
+    
+def profile_view(request):
+    return render(request, 'core/profile.html', {'user': request.user})
+
+@login_required
+def edit_profile_view(request):
+    # Ensure user has a profile (create if missing)
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        bio = request.POST.get("bio", "")
+        interests = request.POST.get("interests", "")
+
+        profile.bio = bio
+        profile.interests = interests
+        profile.save()
+
+        return redirect("core:profile")  # Redirect back to profile page
+
+    return render(request, "core/edit_profile.html", {"profile": profile})
