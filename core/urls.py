@@ -1,7 +1,6 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
-from django.contrib.auth import views as auth_views
 
 # Create a router for viewsets
 router = DefaultRouter()

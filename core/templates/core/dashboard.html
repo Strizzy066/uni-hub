@@ -4,89 +4,99 @@
 {% block title %}Dashboard - Uni Hub{% endblock %}
 
 {% block content %}
-<div style="background-color: #f8f9fa; min-height: 90vh; padding: 2rem 0;">
-  <div class="container">
-    <div class="row">
+<div class="bg-gray-100 min-h-screen py-8">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col items-center">
       <!-- Community Box -->
-      <div class="col-md-4 mb-4">
-        <div style="background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1.5rem; height: 100%;">
-          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-            <div style="background-color: #e8efff; width: 40px; height: 40px; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-right: 1rem;">
+      <div class="w-full lg:w-2/3 xl:w-1/2 mb-6">
+        <div class="bg-white rounded-lg shadow-md p-6 h-full">
+          <div class="flex items-center mb-4">
+            <div class="bg-blue-50 w-10 h-10 rounded-lg flex justify-center items-center mr-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#5468ff" viewBox="0 0 16 16">
-                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                <path
+                  d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
               </svg>
             </div>
-            <h5 style="margin: 0; font-weight: 600;">Community</h5>
+            <h5 class="m-0 font-semibold">Community</h5>
           </div>
-          
+
           <div>
-            <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">
+            <p class="text-sm mb-6">
               Join communities that match your interests and connect with peers who share your academic pursuits.
             </p>
-            
+
             <div>
-              <h6 style="font-weight: 600; font-size: 0.9rem;">Your Communities</h6>
-              <p style="color: #6c757d; font-size: 0.9rem;">You haven't joined any communities yet.</p>
-              
-              <h6 style="font-weight: 600; font-size: 0.9rem; margin-top: 1rem;">Recommended For You</h6>
-              <p style="color: #6c757d; font-size: 0.9rem;">No recommendations available.</p>
-              
-              <div style="text-align: center; margin-top: 1.5rem; display: flex; justify-content: center; gap: 10px;">
-                <a href="#" style="display: inline-block; background-color: #5468ff; color: white; text-decoration: none; padding: 0.5rem 1.5rem; border-radius: 4px; font-weight: 500;">Explore Communities</a>
-                <a href="#" style="display: inline-block; background-color: #5468ff; color: white; text-decoration: none; padding: 0.5rem 1.5rem; border-radius: 4px; font-weight: 500;">Create a Community</a>
+              <h6 class="font-semibold text-sm">Your Communities</h6>
+              <p class="text-gray-500 text-sm">You haven't joined any communities yet.</p>
+
+              <h6 class="font-semibold text-sm mt-4">Recommended For You</h6>
+              <p class="text-gray-500 text-sm">No recommendations available.</p>
+
+              <div class="text-center mt-6 flex justify-center gap-2">
+                <a href="#"
+                  class="inline-block bg-blue-600 text-white py-2 px-6 rounded font-medium hover:bg-blue-700 transition">Explore
+                  Communities</a>
+                <a href="#"
+                  class="inline-block bg-blue-600 text-white py-2 px-6 rounded font-medium hover:bg-blue-700 transition">Create
+                  a Community</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- Notification Center Box -->
-      <div class="col-md-4 mb-4">
-        <div style="background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1.5rem; height: 100%;">
-          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-            <div style="background-color: #e8efff; width: 40px; height: 40px; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-right: 1rem;">
+      <div class="w-full lg:w-2/3 xl:w-1/2 mb-6">
+        <div class="bg-white rounded-lg shadow-md p-6 h-full">
+          <div class="flex items-center mb-4">
+            <div class="bg-blue-50 w-10 h-10 rounded-lg flex justify-center items-center mr-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#5468ff" viewBox="0 0 16 16">
-                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                <path
+                  d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
               </svg>
             </div>
-            <h5 style="margin: 0; font-weight: 600;">Notification Center</h5>
+            <h5 class="m-0 font-semibold">Notification Center</h5>
           </div>
-          
+
           <div>
-            <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">
+            <p class="text-sm mb-6">
               Stay updated with important announcements, event reminders, and community activities across campus.
             </p>
-            
-            <div style="display: flex; justify-content: center; align-items: center; min-height: 120px;">
-              <p style="color: #6c757d; font-size: 0.9rem;">You have no new notifications.</p>
+
+            <div class="flex justify-center items-center min-h-[120px]">
+              <p class="text-gray-500 text-sm">You have no new notifications.</p>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- Events Box -->
-      <div class="col-md-4 mb-4">
-        <div style="background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1.5rem; height: 100%;">
-          <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-            <div style="background-color: #e8efff; width: 40px; height: 40px; border-radius: 8px; display: flex; justify-content: center; align-items: center; margin-right: 1rem;">
+      <div class="w-full lg:w-2/3 xl:w-1/2 mb-6">
+        <div class="bg-white rounded-lg shadow-md p-6 h-full">
+          <div class="flex items-center mb-4">
+            <div class="bg-blue-50 w-10 h-10 rounded-lg flex justify-center items-center mr-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#5468ff" viewBox="0 0 16 16">
-                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                <path
+                  d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
               </svg>
             </div>
-            <h5 style="margin: 0; font-weight: 600;">Events</h5>
+            <h5 class="m-0 font-semibold">Events</h5>
           </div>
-          
+
           <div>
-            <p style="font-size: 0.95rem; margin-bottom: 1.5rem;">
-              Discover and participate in campus events, workshops, and social gatherings organized by various communities.
+            <p class="text-sm mb-6">
+              Discover and participate in campus events, workshops, and social gatherings organized by various
+              communities.
             </p>
-            
+
             <div>
-              <h6 style="font-weight: 600; font-size: 0.9rem;">Upcoming Events</h6>
-              <p style="color: #6c757d; font-size: 0.9rem;">No upcoming events.</p>
-              
-              <div style="text-align: center; margin-top: 1.5rem;">
-                <a href="#" style="display: inline-block; background-color: #5468ff; color: white; text-decoration: none; padding: 0.5rem 1.5rem; border-radius: 4px; font-weight: 500;">Create an Event</a>
+              <h6 class="font-semibold text-sm">Upcoming Events</h6>
+              <p class="text-gray-500 text-sm">No upcoming events.</p>
+
+              <div class="text-center mt-6">
+                <a href="#"
+                  class="inline-block bg-blue-600 text-white py-2 px-6 rounded font-medium hover:bg-blue-700 transition">Create
+                  an Event</a>
               </div>
             </div>
           </div>
