@@ -33,6 +33,11 @@
                         </li>
                         {% if user.is_authenticated %}
                         <li>
+                            <a href="{% url 'core:dashboard' %}" class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
                             <a href="{% url 'core:profile' %}" class="text-gray-700 hover:text-indigo-500 transition-colors text-sm font-medium">
                                 Profile
                             </a>

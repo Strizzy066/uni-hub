@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
+from django.contrib.auth import views as auth_views
 
 # Create a router for viewsets
 router = DefaultRouter()
@@ -16,6 +17,7 @@ web_patterns = [
     path('profile/', views.profile_view, name='profile'), 
     path('profile/edit/', views.edit_profile_view, name='edit_profile'),
     path('profile/change-password/', views.change_password_view, name='change_password'),
+    path('dashboard/', views.dashboard, name='dashboard'),
 ]
 
 urlpatterns = [
