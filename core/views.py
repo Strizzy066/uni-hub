@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomPasswordChangeForm
 from .models import Profile
 from .models import Community, Notification, Event
 from django.utils import timezone
@@ -103,6 +103,27 @@ def edit_profile_view(request):
         return redirect("core:profile")  # Redirect back to profile page
 
     return render(request, "core/edit_profile.html", {"profile": profile})
+
+@login_required
+def change_password_view(request):
+    """
+    Web view function for changing user password.
+    """
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Keep the user logged in after password change
+            update_session_auth_hash(request, user)
+            messages.success(request, "Your password was successfully updated!")
+            return redirect('core:profile')
+        else:
+            for error in form.errors.values():
+                messages.error(request, error[0])
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    
+    return render(request, 'core/change_password.html', {'form': form})
 
 @login_required
 def dashboard(request):

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
@@ -34,3 +34,11 @@ class CustomAuthenticationForm(AuthenticationForm):
     """
     username = forms.EmailField()
     remember_me = forms.BooleanField(required=False)
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    """
+    Custom password change form with better error messages.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # You can customize field attributes or help text here if needed
