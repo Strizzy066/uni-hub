@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+# from django.contrib.auth.models import User
+# from django.utils import timezone
 class UserManager(BaseUserManager):
     """
     Custom user model manager where email is the unique identifier
@@ -59,3 +61,52 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}'s Profile"
+    
+class Community(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_communities')
+    members = models.ManyToManyField(User, related_name='communities')
+    
+    def __str__(self):
+        return self.name
+        
+    @property
+    def member_count(self):
+        return self.members.count()
+
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    location = models.CharField(max_length=200, blank=True, null=True)
+    is_virtual = models.BooleanField(default=False)
+    virtual_link = models.URLField(blank=True, null=True)
+    community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='events')
+    organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organized_events')
+    participants = models.ManyToManyField(User, related_name='events', blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title
+        
+    @property
+    def is_upcoming(self):
+        return self.date >= timezone.now().date()
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    title = models.CharField(max_length=100)
+    message = models.TextField()
+    link = models.CharField(max_length=200, blank=True, null=True)
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.user.username}: {self.title}"
+        
+    class Meta:
+        ordering = ['-created_at']
