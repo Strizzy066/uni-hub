@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from .models import Profile
-
+from .models import Community, Notification, Event
+from django.utils import timezone
+from django.db.models import Count
 # DRF
 from rest_framework import status
 from rest_framework.views import APIView
@@ -101,6 +103,37 @@ def edit_profile_view(request):
         return redirect("core:profile")  # Redirect back to profile page
 
     return render(request, "core/edit_profile.html", {"profile": profile})
+
+@login_required
+def dashboard(request):
+    
+    user_communities = Community.objects.filter(members=request.user)
+    
+    
+    recommended_communities = Community.objects.exclude(
+        members=request.user
+    ).annotate(
+        member_count=Count('members')
+    ).order_by('-member_count')[:5]
+    
+    # Get notifications for the user
+    notifications = Notification.objects.filter(
+        user=request.user
+    ).order_by('-created_at')[:5]
+    
+    # Get upcoming events
+    upcoming_events = Event.objects.filter(
+        date__gte=timezone.now().date()
+    ).order_by('date', 'start_time')[:5]
+    
+    context = {
+        'user_communities': user_communities,
+        'recommended_communities': recommended_communities,
+        'notifications': notifications,
+        'upcoming_events': upcoming_events,
+    }
+    
+    return render(request, 'core/dashboard.html', {})
 
 # API Views
 class UserListAPIView(APIView):
