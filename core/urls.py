@@ -1,6 +1,8 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
+from .views import search_communities
+
 
 # Create a router for viewsets
 router = DefaultRouter()
@@ -29,4 +31,8 @@ urlpatterns = [
         # Manual resource endpoints
         path('users/', views.UserListAPIView.as_view(), name='user-list'),
     ])),
+]
+
+urlpatterns += [
+    path('search/', search_communities, name='search_communities'),
 ]

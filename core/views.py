@@ -16,6 +16,16 @@ from .serializers import UserSerializer
 from .models import User
 
 # Create your views here.
+
+def search_communities(request):
+    query = request.GET.get('query', '')
+    if query:
+        communities = Community.objects.filter(name__icontains=query)
+    else:
+        communities = Community.objects.none()  # Return no communities if no query is provided
+    return render(request, 'core/search.html', {'communities': communities})
+
+
 def home(request):
     """
     View function for the home page of the site.
